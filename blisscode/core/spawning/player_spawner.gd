@@ -15,10 +15,7 @@ func _after_ready():
 	spawn()
 	
 func spawn():
-	var user_profile = UserManager.get_current_user_profile()
-	var skin = user_profile.current_character_skin
-	if not skin:
-		skin = default_skin
+	var skin = default_skin
 	player = CharacterManager.instantiate_character_from_skin(skin, parent)
 	player.spawn_position = global_position
 	player.focus()
