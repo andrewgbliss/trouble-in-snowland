@@ -93,7 +93,12 @@ func _physics_process(delta):
 		call_deferred("queue_free")
 
 func _apply_gravity(delta: float):
-	velocity += get_gravity() * GameManager.game_config.gravity_dir.normalized() * gravity_percent * delta
+	var gravity_vec = get_gravity()
+	# If get_gravity() returns zero (common for StaticBody2D), get it from project settings
+	if gravity_vec == Vector2.ZERO:
+		var gravity_magnitude = ProjectSettings.get_setting("physics/2d/default_gravity")
+		gravity_vec = Vector2(0, gravity_magnitude)
+	velocity += gravity_vec.length() * GameManager.game_config.gravity_dir.normalized() * gravity_percent * delta
 
 func start(p, dir):
 	position = p

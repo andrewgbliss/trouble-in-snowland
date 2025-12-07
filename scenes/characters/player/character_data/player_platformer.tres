@@ -17,17 +17,9 @@ health = 10
 max_health = 10
 metadata/_custom_type_script = "uid://bkcl7yhvmiokh"
 
-[sub_resource type="Resource" id="Resource_aexl2"]
-script = ExtResource("2_khsou")
-metadata/_custom_type_script = "uid://cwaaqivnrog6d"
-
-[sub_resource type="Resource" id="Resource_6pceb"]
-script = ExtResource("4_m3wx5")
-metadata/_custom_type_script = "uid://ej3t1d08m43w"
-
 [sub_resource type="Resource" id="Resource_dg48u"]
 script = ExtResource("8_iycih")
-projectile = "projectile"
+projectile = "snowball"
 max_ammo = 10
 unlimited_ammo = true
 spread_angle = 0.0
@@ -40,6 +32,15 @@ name = "black pistol"
 texture = ExtResource("9_m3wx5")
 hframes = 3
 metadata/_custom_type_script = "uid://dx15io88tra7t"
+
+[sub_resource type="Resource" id="Resource_aexl2"]
+script = ExtResource("2_khsou")
+left_hand = SubResource("Resource_dg48u")
+metadata/_custom_type_script = "uid://cwaaqivnrog6d"
+
+[sub_resource type="Resource" id="Resource_6pceb"]
+script = ExtResource("4_m3wx5")
+metadata/_custom_type_script = "uid://ej3t1d08m43w"
 
 [sub_resource type="Resource" id="Resource_mmce0"]
 script = ExtResource("8_iycih")

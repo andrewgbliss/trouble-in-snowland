@@ -35,7 +35,6 @@ texture = ExtResource("2_b4cuu")
 centered = false
 
 [node name="Parallax2D3" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(320, 0)
 repeat_times = 12
 
@@ -45,9 +44,7 @@ texture = ExtResource("2_hthus")
 centered = false
 
 [node name="Parallax2D4" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.2, 0.2)
 repeat_size = Vector2(320, 0)
-autoscroll = Vector2(-5, 0)
 repeat_times = 12
 
 [node name="Clouds1" type="Sprite2D" parent="Parallax2D4"]
@@ -81,7 +78,6 @@ position = Vector2(269, -4)
 texture = ExtResource("4_ey857")
 
 [node name="Parallax2D5" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.3, 0.3)
 repeat_size = Vector2(320, 0)
 repeat_times = 12
 
@@ -91,7 +87,6 @@ texture = ExtResource("4_he255")
 centered = false
 
 [node name="Parallax2D6" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.4, 0.4)
 repeat_size = Vector2(320, 0)
 repeat_times = 12
 

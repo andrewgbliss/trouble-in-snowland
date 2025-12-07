@@ -7,25 +7,14 @@ enum KnockbackDirection {
 	SIDE
 }
 
+@export var character: CharacterController
 @export var damage: int = 1
-@export var facing_left_position: Vector2 = Vector2.ZERO
-@export var facing_right_position: Vector2 = Vector2.ZERO
 @export var animated_sprite: AnimatedSprite2D
 @export var knockback_direction: KnockbackDirection = KnockbackDirection.NONE
 @export var collide_effect: PackedScene
 
-var parent
-
 func _ready() -> void:
-	parent = get_parent()
 	body_entered.connect(_on_body_entered)
-
-func _process(_delta: float) -> void:
-	if animated_sprite:
-		if animated_sprite.flip_h:
-			position = facing_left_position
-		else:
-			position = facing_right_position
 
 func _on_body_entered(body: Node2D) -> void:
 	var collide_position = get_collision_point(body)
@@ -40,7 +29,7 @@ func _on_body_entered(body: Node2D) -> void:
 	elif knockback_direction == KnockbackDirection.DOWN:
 		direction = Vector2.DOWN
 	elif knockback_direction == KnockbackDirection.SIDE:
-		if parent.is_facing_right:
+		if character.is_facing_right:
 			direction = Vector2.LEFT
 		else:
 			direction = Vector2.RIGHT
@@ -55,10 +44,10 @@ func _on_body_entered(body: Node2D) -> void:
 			body_parent.take_damage(damage)
 			apply_knockback_rigid(body)
 			if knockback_direction != KnockbackDirection.NONE:
-				parent.apply_knockback(direction)
+				character.apply_knockback(direction)
 	if body is TileMapLayerAdvanced:
 		if knockback_direction != KnockbackDirection.NONE:
-			parent.apply_knockback(direction)
+			character.apply_knockback(direction)
 
 func get_collision_point(body) -> Vector2:
 	# Calculate the contact point between hitbox and body
@@ -97,6 +86,6 @@ func get_collision_point(body) -> Vector2:
 func apply_knockback_rigid(rigidbody: RigidBody2D) -> void:
 	# Direction AWAY from hitbox - flip it
 	var direction = (rigidbody.global_position - global_position).normalized()
-	var impulse = direction * parent.character.knockback_force * 2.0
+	var impulse = direction * character.character.knockback_force * 2.0
 	# print("Knockback direction: ", direction, " impulse: ", impulse)
 	rigidbody.apply_central_impulse(impulse)

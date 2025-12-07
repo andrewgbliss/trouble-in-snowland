@@ -65,6 +65,8 @@ func _input(event):
 		return
 	if event is InputEventKey:
 		if event.is_action_pressed("take"):
+			if keyboard_take_actions.require_in_range and not in_range:
+				return
 			keyboard_take_body = get_tree().get_first_node_in_group("player")
 			keyboard_take_actions.blackboard.set_var("body", keyboard_take_body)
 			keyboard_take_actions.blackboard.set_var("interaction_position", global_position)
@@ -76,6 +78,8 @@ func _on_input_event(_viewport, _event, _shape_idx):
 	if not enabled or not use_mouse or mouse_click_actions == null:
 		return
 	if Input.is_action_just_pressed("take"):
+		if mouse_click_actions.require_in_range and not in_range:
+			return
 		mouse_click_body = get_tree().get_first_node_in_group("player")
 		mouse_click_actions.blackboard.set_var("body", mouse_click_body)
 		mouse_click_actions.blackboard.set_var("interaction_position", global_position)

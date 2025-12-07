@@ -1,13 +1,11 @@
-[gd_scene load_steps=72 format=3 uid="uid://87eqnxhrvspi"]
+[gd_scene load_steps=58 format=3 uid="uid://87eqnxhrvspi"]
 
 [ext_resource type="Shader" uid="uid://i1wplu28b7c4" path="res://blisscode/shaders/character.gdshader" id="1_2b6yq"]
 [ext_resource type="Script" uid="uid://cyhaw1qyjtrhn" path="res://blisscode/character/character_controller.gd" id="2_4utb2"]
 [ext_resource type="Resource" uid="uid://bpvocg3gjelfh" path="res://scenes/characters/player/character_data/player_platformer.tres" id="3_37y6l"]
 [ext_resource type="Script" uid="uid://d2lsy2pdynjo3" path="res://blisscode/character/controls/player_controls.gd" id="4_ydd6h"]
-[ext_resource type="Script" uid="uid://b0mjv3yqikegv" path="res://blisscode/character/hitbox.gd" id="5_od7mt"]
 [ext_resource type="PackedScene" uid="uid://m5xmcne3gd3q" path="res://scenes/effects/collisions/particle_damage.tscn" id="6_uy03p"]
-[ext_resource type="Script" uid="uid://bbu01ls8u8fow" path="res://blisscode/effects/collisions/explosion.gd" id="7_slwi2"]
-[ext_resource type="SpriteFrames" uid="uid://dwuah0ahgx6b6" path="res://assets/img/characters/kungfury/KungFury-32x48.res" id="8_2b6yq"]
+[ext_resource type="SpriteFrames" uid="uid://ciupeqcrm2mv" path="res://assets/img/characters/snowman/snowman.res" id="8_2b6yq"]
 [ext_resource type="Script" uid="uid://0vge3j1r1s0n" path="res://blisscode/character/animation/animated_sprite_facing_direction.gd" id="9_a7ic8"]
 [ext_resource type="PackedScene" uid="uid://qduhqb6f8ovy" path="res://scenes/characters/ui/character_points_bar.tscn" id="10_hcemg"]
 [ext_resource type="PackedScene" uid="uid://c37f3qdvli5sr" path="res://blisscode/character/alignment/alignment.tscn" id="11_fd2t6"]
@@ -15,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://yfinwvdrgjhy" path="res://assets/img/ui/icons/red-arrow.png" id="13_h1v6e"]
 [ext_resource type="Texture2D" uid="uid://iy021d8gnrks" path="res://assets/img/cursors/crosshairs.png" id="14_ap8r2"]
 [ext_resource type="Texture2D" uid="uid://bxqd1qybg36cl" path="res://assets/img/cursors/circle.png" id="15_0l5u3"]
-[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="16_vcapd"]
 [ext_resource type="Script" uid="uid://bx4nlc04ew5og" path="res://blisscode/physics/raycast_2d_advanced.gd" id="18_c6pgu"]
 [ext_resource type="Script" uid="uid://bti4mwhmm58cm" path="res://blisscode/state_machine/states/platformer_state_machine.gd" id="19_rt4q4"]
 [ext_resource type="Script" uid="uid://c3rd0mfca06gc" path="res://blisscode/state_machine/states/spawn_state.gd" id="20_ly2vv"]
@@ -67,65 +64,10 @@ shader_parameter/pulse_cycle = true
 shader_parameter/pulse_mode = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wocps"]
-size = Vector2(8, 34)
+size = Vector2(15, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1kwg"]
-size = Vector2(8, 11.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1x7x"]
-size = Vector2(9, 9)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b0uy1"]
-light_mode = 1
-
-[sub_resource type="Gradient" id="Gradient_4xvvr"]
-offsets = PackedFloat32Array(0, 0.986175)
-colors = PackedColorArray(1, 1, 1, 1, 0.572988, 0.572988, 0.572988, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_hij5e"]
-gradient = SubResource("Gradient_4xvvr")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tcs0j"]
-particle_flag_disable_z = true
-direction = Vector3(-1, 0, 0)
-spread = 90.0
-initial_velocity_min = 50.0
-initial_velocity_max = 50.0
-gravity = Vector3(0, 50, 0)
-scale_max = 1.5
-color_ramp = SubResource("GradientTexture1D_hij5e")
-
-[sub_resource type="PackedScene" id="PackedScene_bdj30"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"names": PackedStringArray("ParticleDamage", "script", "animation_name", "screen_shake_amount", "emitter", "min_audio_level", "max_audio_level", "Node2D", "HitboxSubEmitter", "material", "emitting", "amount", "lifetime", "one_shot", "visibility_rect", "local_coords", "process_material", "GPUParticles2D"),
-"node_count": 2,
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 7, 0, -1, 6, 1, 0, 2, 1, 3, 2, 1073741828, 3, 5, 4, 6, 4, 0, 0, 0, 17, 8, -1, 8, 9, 5, 10, 6, 11, 7, 12, 8, 13, 9, 14, 10, 15, 9, 16, 11, 0),
-"variants": [ExtResource("7_slwi2"), "", 5.0, NodePath("HitboxSubEmitter"), null, SubResource("CanvasItemMaterial_b0uy1"), false, 10, 0.25, true, Rect2(-32, -32, 64, 64), SubResource("ParticleProcessMaterial_tcs0j")],
-"version": 3
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1h4ch"]
-size = Vector2(9, 2.5)
-
-[sub_resource type="PackedScene" id="PackedScene_s1kwg"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"names": PackedStringArray("ParticleDamage", "script", "animation_name", "screen_shake_amount", "emitter", "min_audio_level", "max_audio_level", "Node2D", "HitboxSubEmitter", "material", "emitting", "amount", "lifetime", "one_shot", "visibility_rect", "local_coords", "process_material", "GPUParticles2D"),
-"node_count": 2,
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 7, 0, -1, 6, 1, 0, 2, 1, 3, 2, 1073741828, 3, 5, 4, 6, 4, 0, 0, 0, 17, 8, -1, 8, 9, 5, 10, 6, 11, 7, 12, 8, 13, 9, 14, 10, 15, 9, 16, 11, 0),
-"variants": [ExtResource("7_slwi2"), "", 5.0, NodePath("HitboxSubEmitter"), null, SubResource("CanvasItemMaterial_b0uy1"), false, 10, 0.25, true, Rect2(-32, -32, 64, 64), SubResource("ParticleProcessMaterial_tcs0j")],
-"version": 3
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vluxo"]
-size = Vector2(9, 2.5)
+size = Vector2(15, 16)
 
 [sub_resource type="Animation" id="Animation_bavp1"]
 resource_name = "Death"
@@ -142,87 +84,15 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1)
 }
 
-[sub_resource type="Animation" id="Animation_ngigd"]
-resource_name = "Kick"
-length = 0.3
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"Kick", 1.0, false],
-"method": &"play"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_l1x7x"]
-resource_name = "Punch"
-length = 0.3
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"Punch", 1.0, false],
-"method": &"play"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-
 [sub_resource type="Animation" id="Animation_wcj4n"]
 length = 0.001
-tracks/0/type = "value"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/path = NodePath(".:material:shader_parameter/teleport_progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:material:shader_parameter/teleport_progress")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.16666667, -0.009500001, 0, 0),
 "times": PackedFloat32Array(0)
@@ -245,96 +115,47 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i2drd"]
 _data = {
 &"Death": SubResource("Animation_bavp1"),
-&"Kick": SubResource("Animation_ngigd"),
-&"Punch": SubResource("Animation_l1x7x"),
 &"RESET": SubResource("Animation_wcj4n"),
 &"Spawn": SubResource("Animation_ciexm")
 }
 
 [node name="PlayerSide32" type="CharacterBody2D" node_paths=PackedStringArray("controls", "state_machine", "dialog_bubble", "dangling_raycast", "ladder_raycast", "ledge_grab_raycast") groups=["persist", "player"]]
 material = SubResource("ShaderMaterial_8kth0")
-collision_mask = 260
+collision_layer = 1025
+collision_mask = 772
 script = ExtResource("2_4utb2")
 character = ExtResource("3_37y6l")
 controls = NodePath("PlayerControls")
 state_machine = NodePath("PlatformerStateMachine")
 hide_on_ready = false
-dialog_bubble = NodePath("DialogBubble")
-dangling_raycast = NodePath("DanglingRayCast2D")
-ladder_raycast = NodePath("LadderRayCast2D")
-ledge_grab_raycast = NodePath("LedgeGrabRayCast2D")
+dialog_bubble = NodePath("UI/DialogBubble")
+dangling_raycast = NodePath("Raycasts/DanglingRayCast2D")
+ladder_raycast = NodePath("Raycasts/LadderRayCast2D")
+ledge_grab_raycast = NodePath("Raycasts/LedgeGrabRayCast2D")
 
 [node name="PlayerControls" type="Node" parent="." node_paths=PackedStringArray("state_machine", "aim_sprite", "touch_sprite")]
 script = ExtResource("4_ydd6h")
 state_machine = NodePath("../PlatformerStateMachine")
-aim_sprite = NodePath("../Crosshairs")
+aim_sprite = NodePath("../UI/Crosshairs")
 show_aim_sprite = false
-touch_sprite = NodePath("../TouchCircle")
+touch_sprite = NodePath("../UI/TouchCircle")
 show_touch_sprite = false
 metadata/_custom_type_script = "uid://d2lsy2pdynjo3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -13)
+position = Vector2(0.5, -8)
 shape = SubResource("RectangleShape2D_wocps")
 
 [node name="CrouchCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.75)
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_s1kwg")
-disabled = true
-
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("animated_sprite")]
-position = Vector2(0, -18)
-collision_layer = 512
-collision_mask = 1028
-script = ExtResource("5_od7mt")
-facing_left_position = Vector2(0, -18)
-facing_right_position = Vector2(0, -18)
-animated_sprite = NodePath("../AnimatedSprite2D")
-knockback_direction = 3
-collide_effect = ExtResource("6_uy03p")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(9.5, 5.5)
-shape = SubResource("RectangleShape2D_l1x7x")
-disabled = true
-
-[node name="DownthrustHitbox" type="Area2D" parent="." node_paths=PackedStringArray("animated_sprite")]
-position = Vector2(0, -17)
-collision_layer = 512
-collision_mask = 1028
-script = ExtResource("5_od7mt")
-facing_left_position = Vector2(0, -17)
-facing_right_position = Vector2(0, -17)
-animated_sprite = NodePath("../AnimatedSprite2D")
-knockback_direction = 1
-collide_effect = SubResource("PackedScene_bdj30")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DownthrustHitbox"]
-position = Vector2(1, 20.75)
-shape = SubResource("RectangleShape2D_1h4ch")
-disabled = true
-
-[node name="UpthrustHitbox" type="Area2D" parent="." node_paths=PackedStringArray("animated_sprite")]
-position = Vector2(0, -31)
-collision_layer = 512
-collision_mask = 1028
-script = ExtResource("5_od7mt")
-facing_left_position = Vector2(0, -31)
-facing_right_position = Vector2(0, -31)
-animated_sprite = NodePath("../AnimatedSprite2D")
-knockback_direction = 2
-collide_effect = SubResource("PackedScene_s1kwg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpthrustHitbox"]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_vluxo")
 disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 sprite_frames = ExtResource("8_2b6yq")
-animation = &"Idle"
-offset = Vector2(0, -12)
+animation = &"Damage"
+offset = Vector2(0, -8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -347,128 +168,6 @@ agent = NodePath("..")
 animated_sprite = NodePath("../AnimatedSprite2D")
 flip_offset = Vector2(1.125, 8.15)
 metadata/_custom_type_script = "uid://0vge3j1r1s0n"
-
-[node name="CharacterPointsBar" parent="." instance=ExtResource("10_hcemg")]
-visible = false
-offset_top = -10.0
-offset_bottom = 30.0
-
-[node name="Alignment" parent="." instance=ExtResource("11_fd2t6")]
-visible = false
-position = Vector2(-10, -23)
-
-[node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("controls", "state_machine")]
-visible = false
-offset_left = -10.0
-offset_top = -49.0
-offset_right = 30.0
-offset_bottom = -14.0
-theme_override_constants/line_spacing = -9
-theme_override_font_sizes/font_size = 16
-text = "Position"
-script = ExtResource("12_jt488")
-controls = NodePath("../PlayerControls")
-state_machine = NodePath("../PlatformerStateMachine")
-
-[node name="DirectionArrow" type="TextureRect" parent="."]
-visible = false
-offset_left = 23.0
-offset_top = -9.0
-offset_right = 39.0
-offset_bottom = 7.0
-texture = ExtResource("13_h1v6e")
-
-[node name="Crosshairs" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(61, 0)
-texture = ExtResource("14_ap8r2")
-
-[node name="TouchCircle" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("15_0l5u3")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-process_mode = 4
-layer = 30
-visible = false
-
-[node name="Move Virtual Joystick" parent="CanvasLayer" instance=ExtResource("16_vcapd")]
-offset_left = 25.0
-offset_top = -70.0
-offset_right = 123.0
-offset_bottom = 9.0
-scale = Vector2(0.5, 0.5)
-clampzone_size = 25.0
-action_left = "move_left"
-action_right = "move_right"
-action_up = "move_up"
-action_down = "move_down"
-
-[node name="Aim Virtual Joystick" parent="CanvasLayer" instance=ExtResource("16_vcapd")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -74.0
-offset_top = -71.0
-offset_right = 24.0
-offset_bottom = 8.0
-grow_horizontal = 0
-scale = Vector2(0.5, 0.5)
-clampzone_size = 25.0
-action_left = "aim_left"
-action_right = "aim_right"
-action_up = "aim_up"
-action_down = "aim_down"
-
-[node name="DanglingRayCast2D" type="RayCast2D" parent="." node_paths=PackedStringArray("agent")]
-position = Vector2(6, -19)
-collision_mask = 4
-script = ExtResource("18_c6pgu")
-agent = NodePath("..")
-facing_left_position = Vector2(-10, 0)
-facing_right_position = Vector2(10, 0)
-
-[node name="LadderRayCast2D" type="RayCast2D" parent="." node_paths=PackedStringArray("agent")]
-position = Vector2(0, -15)
-target_position = Vector2(0, -25)
-collision_mask = 2048
-hit_from_inside = true
-script = ExtResource("18_c6pgu")
-agent = NodePath("..")
-metadata/_custom_type_script = "uid://bx4nlc04ew5og"
-
-[node name="TopRayCast2D" type="RayCast2D" parent="." node_paths=PackedStringArray("agent")]
-position = Vector2(-4, -15)
-target_position = Vector2(0, -25)
-collision_mask = 4
-hit_from_inside = true
-script = ExtResource("18_c6pgu")
-agent = NodePath("..")
-facing_left_position = Vector2(-4, 0)
-facing_right_position = Vector2(-4, 0)
-metadata/_custom_type_script = "uid://bx4nlc04ew5og"
-
-[node name="TopRayCast2D2" type="RayCast2D" parent="." node_paths=PackedStringArray("agent")]
-position = Vector2(6, -15)
-target_position = Vector2(0, -25)
-collision_mask = 4
-hit_from_inside = true
-script = ExtResource("18_c6pgu")
-agent = NodePath("..")
-facing_left_position = Vector2(6, 0)
-facing_right_position = Vector2(6, 0)
-metadata/_custom_type_script = "uid://bx4nlc04ew5og"
-
-[node name="LedgeGrabRayCast2D" type="RayCast2D" parent="." node_paths=PackedStringArray("agent")]
-position = Vector2(0, -31)
-target_position = Vector2(15, 0)
-collision_mask = 4
-hit_from_inside = true
-script = ExtResource("18_c6pgu")
-agent = NodePath("..")
-facing_left_position = Vector2(0, -16)
-facing_right_position = Vector2(0, -16)
-metadata/_custom_type_script = "uid://bx4nlc04ew5og"
 
 [node name="PlatformerStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "initial_state", "idle_state")]
 script = ExtResource("19_rt4q4")
@@ -547,23 +246,22 @@ script = ExtResource("32_sfarc")
 animation_name = "Dash"
 metadata/_custom_type_script = "uid://bnn0ai7ycx13p"
 
-[node name="AttackState" type="Node" parent="PlatformerStateMachine"]
+[node name="AttackState" type="Node" parent="PlatformerStateMachine" node_paths=PackedStringArray("attack_spawn_position")]
 script = ExtResource("33_fs632")
-left_hand_attack_animation = "Punch"
-right_hand_attack_animation = "Kick"
+left_hand_attack_animation = "Damage"
+right_hand_attack_animation = "Damage"
+attack_spawn_position = NodePath("../../AttackSpawnPosition")
 play_on_enter = false
-use_animated_sprite = false
+wait_for_animation_finished = true
 metadata/_custom_type_script = "uid://bu0p0lqos7mk"
 
-[node name="DownThrustState" type="Node" parent="PlatformerStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="DownThrustState" type="Node" parent="PlatformerStateMachine"]
 script = ExtResource("34_pef05")
-hitbox = NodePath("../../DownthrustHitbox")
 animation_name = "Down Thrust"
 metadata/_custom_type_script = "uid://dqwiv83jman"
 
-[node name="UpThrustState" type="Node" parent="PlatformerStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="UpThrustState" type="Node" parent="PlatformerStateMachine"]
 script = ExtResource("35_w17kp")
-hitbox = NodePath("../../UpthrustHitbox")
 animation_name = "Up Thrust"
 metadata/_custom_type_script = "uid://lbc7hxobl82o"
 
@@ -571,8 +269,8 @@ metadata/_custom_type_script = "uid://lbc7hxobl82o"
 script = ExtResource("36_ildmr")
 collision_shape = NodePath("../../CollisionShape2D")
 crouch_collision_shape = NodePath("../../CrouchCollisionShape2D")
-top_raycast_left = NodePath("../../TopRayCast2D")
-top_raycast_right = NodePath("../../TopRayCast2D2")
+top_raycast_left = NodePath("../../Raycasts/TopLeftRayCast2D")
+top_raycast_right = NodePath("../../Raycasts/TopRightRayCast2D")
 animation_name = "Crouch Idle"
 metadata/_custom_type_script = "uid://d23xdwefkddhf"
 
@@ -580,8 +278,8 @@ metadata/_custom_type_script = "uid://d23xdwefkddhf"
 script = ExtResource("37_pj68k")
 collision_shape = NodePath("../../CollisionShape2D")
 crouch_collision_shape = NodePath("../../CrouchCollisionShape2D")
-top_raycast_left = NodePath("../../TopRayCast2D")
-top_raycast_right = NodePath("../../TopRayCast2D2")
+top_raycast_left = NodePath("../../Raycasts/TopLeftRayCast2D")
+top_raycast_right = NodePath("../../Raycasts/TopRightRayCast2D")
 animation_name = "Crouch Walk"
 metadata/_custom_type_script = "uid://qfh8rf6645xi"
 
@@ -664,10 +362,108 @@ script = ExtResource("51_yw5n6")
 priority = 5
 follow_mode = 2
 follow_target = NodePath("..")
+zoom = Vector2(2, 2)
 tween_resource = ExtResource("52_yw5n6")
 follow_damping = true
 draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="DialogBubble" parent="." instance=ExtResource("53_2b6yq")]
-position = Vector2(-44, -55)
+[node name="AttackSpawnPosition" type="Node2D" parent="."]
+position = Vector2(14, -14)
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="DanglingRayCast2D" type="RayCast2D" parent="Raycasts" node_paths=PackedStringArray("agent")]
+position = Vector2(11, -4)
+target_position = Vector2(0, 32)
+collision_mask = 4
+script = ExtResource("18_c6pgu")
+agent = NodePath("../..")
+flip_x = true
+
+[node name="LadderRayCast2D" type="RayCast2D" parent="Raycasts" node_paths=PackedStringArray("agent")]
+position = Vector2(0, -23)
+target_position = Vector2(0, -25)
+collision_mask = 2048
+hit_from_inside = true
+script = ExtResource("18_c6pgu")
+agent = NodePath("../..")
+metadata/_custom_type_script = "uid://bx4nlc04ew5og"
+
+[node name="LedgeGrabRayCast2D" type="RayCast2D" parent="Raycasts" node_paths=PackedStringArray("agent")]
+position = Vector2(11, -23)
+target_position = Vector2(15, 0)
+collision_mask = 4
+hit_from_inside = true
+script = ExtResource("18_c6pgu")
+agent = NodePath("../..")
+flip_x = true
+metadata/_custom_type_script = "uid://bx4nlc04ew5og"
+
+[node name="TopLeftRayCast2D" type="RayCast2D" parent="Raycasts" node_paths=PackedStringArray("agent")]
+position = Vector2(-7, -23)
+target_position = Vector2(0, -25)
+collision_mask = 4
+hit_from_inside = true
+script = ExtResource("18_c6pgu")
+agent = NodePath("../..")
+metadata/_custom_type_script = "uid://bx4nlc04ew5og"
+
+[node name="TopRightRayCast2D" type="RayCast2D" parent="Raycasts" node_paths=PackedStringArray("agent")]
+position = Vector2(8, -23)
+target_position = Vector2(0, -25)
+collision_mask = 4
+hit_from_inside = true
+script = ExtResource("18_c6pgu")
+agent = NodePath("../..")
+metadata/_custom_type_script = "uid://bx4nlc04ew5og"
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="DialogBubble" parent="UI" instance=ExtResource("53_2b6yq")]
+position = Vector2(-36, -48)
+
+[node name="CharacterPointsBar" parent="UI" node_paths=PackedStringArray("character") instance=ExtResource("10_hcemg")]
+visible = false
+offset_left = -9.0
+offset_top = -58.0
+offset_right = 31.0
+offset_bottom = -18.0
+character = NodePath("../..")
+
+[node name="Alignment" parent="UI" node_paths=PackedStringArray("character") instance=ExtResource("11_fd2t6")]
+visible = false
+position = Vector2(-45, -59)
+character = NodePath("../..")
+
+[node name="DebugLabel" type="Label" parent="UI" node_paths=PackedStringArray("character", "controls", "state_machine")]
+visible = false
+offset_left = 23.0
+offset_top = -62.0
+offset_right = 63.0
+offset_bottom = -27.0
+theme_override_constants/line_spacing = -9
+theme_override_font_sizes/font_size = 16
+text = "Position"
+script = ExtResource("12_jt488")
+character = NodePath("../..")
+controls = NodePath("../../PlayerControls")
+state_machine = NodePath("../../PlatformerStateMachine")
+
+[node name="DirectionArrow" type="TextureRect" parent="UI"]
+visible = false
+offset_left = 28.0
+offset_top = -17.0
+offset_right = 44.0
+offset_bottom = -1.0
+texture = ExtResource("13_h1v6e")
+
+[node name="Crosshairs" type="Sprite2D" parent="UI"]
+visible = false
+position = Vector2(61, 0)
+texture = ExtResource("14_ap8r2")
+
+[node name="TouchCircle" type="Sprite2D" parent="UI"]
+visible = false
+position = Vector2(60, -18)
+texture = ExtResource("15_0l5u3")

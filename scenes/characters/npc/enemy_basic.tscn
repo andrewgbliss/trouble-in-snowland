@@ -70,7 +70,7 @@ script = ExtResource("1_osuh0")
 character = SubResource("Resource_dskel")
 controls = NodePath("AIControls")
 state_machine = NodePath("PlatformerStateMachine")
-dialog_bubble = NodePath("DialogBubble")
+dialog_bubble = NodePath("UI/DialogBubble")
 is_facing_right = false
 garbage = true
 garbage_time = 0.1
@@ -89,23 +89,6 @@ use_parent_material = true
 sprite_frames = ExtResource("4_4u005")
 animation = &"Land"
 offset = Vector2(0, -12)
-
-[node name="CharacterPointsBar" parent="." node_paths=PackedStringArray("character") instance=ExtResource("17_kbn3i")]
-visible = false
-character = NodePath("..")
-
-[node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("controls")]
-visible = false
-offset_left = -10.0
-offset_top = -56.0
-offset_right = 30.0
-offset_bottom = -24.0
-theme_override_constants/line_spacing = -9
-theme_override_font_sizes/font_size = 16
-text = "State
-Position"
-script = ExtResource("18_u6807")
-controls = NodePath("../AIControls")
 
 [node name="PlatformerStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "initial_state", "idle_state")]
 script = ExtResource("9_ixy2f")
@@ -309,5 +292,24 @@ script = ExtResource("14_fxbe1")
 acquire_target = true
 metadata/_custom_type_script = "uid://b8x28spcn1q3a"
 
-[node name="DialogBubble" parent="." instance=ExtResource("49_hclpo")]
+[node name="UI" type="Node2D" parent="."]
+
+[node name="DialogBubble" parent="UI" instance=ExtResource("49_hclpo")]
 position = Vector2(-45, -38)
+
+[node name="DebugLabel" type="Label" parent="UI" node_paths=PackedStringArray("controls")]
+visible = false
+offset_left = -10.0
+offset_top = -56.0
+offset_right = 30.0
+offset_bottom = -24.0
+theme_override_constants/line_spacing = -9
+theme_override_font_sizes/font_size = 16
+text = "State
+Position"
+script = ExtResource("18_u6807")
+controls = NodePath("../../AIControls")
+
+[node name="CharacterPointsBar" parent="UI" node_paths=PackedStringArray("character") instance=ExtResource("17_kbn3i")]
+visible = false
+character = NodePath("../..")

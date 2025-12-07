@@ -15,11 +15,11 @@ func get_user_profile(user_profile_index: int):
 
 func select_user_profile(user_profile_index: int):
 	current_user_profile_index = user_profile_index
-	var user_profile = get_current_user_profile()
-	if user_profile.character_skins.size() == 0:
-		GameManager.game_character_create()
-	else:
-		GameManager.game_start()
+	#var user_profile = get_current_user_profile()
+	#if user_profile.character_skins.size() == 0:
+		#GameManager.game_character_create()
+	#else:
+	GameManager.game_start()
 
 func save():
 	for i in range(user_profiles.size()):

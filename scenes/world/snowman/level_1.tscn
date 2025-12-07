@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://rl7jgt8unxl0"]
+[gd_scene load_steps=24 format=4 uid="uid://rl7jgt8unxl0"]
 
 [ext_resource type="Script" uid="uid://bm85budamtxnd" path="res://blisscode/core/world/world.gd" id="1_5kbmb"]
 [ext_resource type="PackedScene" uid="uid://cibqtabp8a7f1" path="res://scenes/world/snowman/parallax_background.tscn" id="2_a8iue"]
@@ -10,15 +10,19 @@
 [ext_resource type="Resource" uid="uid://caoil85u843me" path="res://blisscode/character/character_manager/skins/character_side_medium_santa.tres" id="9_i68nn"]
 [ext_resource type="Resource" uid="uid://die2cnioihh5y" path="res://blisscode/character/character_manager/skins/character_side_medium_elf.tres" id="9_ueq8f"]
 [ext_resource type="PackedScene" uid="uid://yinkcfuitmfy" path="res://scenes/weapons/flame_thrower/flame_thrower.tscn" id="10_okqba"]
-[ext_resource type="PackedScene" uid="uid://cek80acxrwkhe" path="res://scenes/items/pickups/random_item_interaction.tscn" id="10_ueq8f"]
-[ext_resource type="PackedScene" uid="uid://comlf0h27ggt2" path="res://blisscode/interaction/change_camera_interaction.tscn" id="10_vo3jb"]
-[ext_resource type="Script" uid="uid://53332qy3c0ng" path="res://blisscode/actions/action/action_wait.gd" id="11_lsyou"]
-[ext_resource type="Script" uid="uid://s0b33neoygs6" path="res://blisscode/actions/action/action_character_dialog_bubble.gd" id="12_lsyou"]
+[ext_resource type="PackedScene" uid="uid://cek80acxrwkhe" path="res://scenes/interactions/items/random_item_interaction.tscn" id="10_ueq8f"]
+[ext_resource type="PackedScene" uid="uid://comlf0h27ggt2" path="res://scenes/interactions/camera/change_camera_interaction.tscn" id="10_vo3jb"]
+[ext_resource type="Script" uid="uid://53332qy3c0ng" path="res://blisscode/interaction/actions/action/action_wait.gd" id="11_lsyou"]
+[ext_resource type="PackedScene" uid="uid://bt0xtivpt5m54" path="res://scenes/interactions/hitboxes/hitbox_interaction.tscn" id="11_vcs5d"]
+[ext_resource type="PackedScene" uid="uid://ua2e13jq4owt" path="res://scenes/interactions/dialog/dialog_interaction.tscn" id="11_w1grp"]
+[ext_resource type="Script" uid="uid://s0b33neoygs6" path="res://blisscode/interaction/actions/action/action_character_dialog_bubble.gd" id="12_lsyou"]
 [ext_resource type="Resource" uid="uid://euybd2w0bax" path="res://addons/phantom_camera/examples/resources/tween/player_phantom_camera_2d_tween.tres" id="12_nou0r"]
+[ext_resource type="Texture2D" uid="uid://dtyb38mm0dkpd" path="res://assets/img/environment/town_sign.png" id="12_qlw76"]
+[ext_resource type="Texture2D" uid="uid://vu6exqo31j1p" path="res://assets/img/environment/Spikes.png" id="12_u1cqy"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="12_vo3jb"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="13_vo3jb"]
-[ext_resource type="Script" uid="uid://clro5bf6kwc2v" path="res://blisscode/actions/action/action_start_flame_thrower.gd" id="17_n8k7a"]
-[ext_resource type="Script" uid="uid://clfhs3iicm8f8" path="res://blisscode/actions/action/action_character_state_dispatch.gd" id="18_0waqn"]
+[ext_resource type="Script" uid="uid://clro5bf6kwc2v" path="res://blisscode/interaction/actions/action/action_start_flame_thrower.gd" id="17_n8k7a"]
+[ext_resource type="Script" uid="uid://clfhs3iicm8f8" path="res://blisscode/interaction/actions/action/action_character_state_dispatch.gd" id="18_0waqn"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_5kbmb")
@@ -54,6 +58,30 @@ metadata/_custom_type_script = "uid://hu7nn53r3dp1"
 
 [node name="FlameThrower" parent="." instance=ExtResource("10_okqba")]
 position = Vector2(2455, 88)
+
+[node name="HitboxInteraction" parent="." instance=ExtResource("11_vcs5d")]
+position = Vector2(637, 72)
+
+[node name="Spikes" type="Sprite2D" parent="HitboxInteraction"]
+texture = ExtResource("12_u1cqy")
+
+[node name="HitboxInteraction2" parent="." instance=ExtResource("11_vcs5d")]
+position = Vector2(674, 72)
+
+[node name="Spikes" type="Sprite2D" parent="HitboxInteraction2"]
+texture = ExtResource("12_u1cqy")
+
+[node name="DialogInteraction" parent="." instance=ExtResource("11_w1grp")]
+position = Vector2(796, 78)
+
+[node name="ActionShowFloatText" parent="DialogInteraction/MouseClickActionPlayer/ActionSequence" index="0"]
+text = "Beware what lies ahead"
+
+[node name="ActionShowFloatText" parent="DialogInteraction/KeyboardTakeActionPlayer/ActionSequence" index="0"]
+text = "Beware what lies ahead"
+
+[node name="Sprite2D" type="Sprite2D" parent="DialogInteraction"]
+texture = ExtResource("12_qlw76")
 
 [node name="RandomItemInteraction" parent="." instance=ExtResource("10_ueq8f")]
 position = Vector2(920, 65)
@@ -173,5 +201,6 @@ process_priority = 300
 process_physics_priority = 300
 script = ExtResource("13_vo3jb")
 
+[editable path="DialogInteraction"]
 [editable path="ChangeCameraInteraction"]
 [editable path="ChangeCameraInteraction2"]

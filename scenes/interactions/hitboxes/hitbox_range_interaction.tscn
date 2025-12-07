@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://bm7qqnu2fq0bc"]
+
+[ext_resource type="Script" uid="uid://ci1gdhk7pg65i" path="res://blisscode/interaction/interaction.gd" id="1_1wwpq"]
+[ext_resource type="Script" uid="uid://j126qsnfmyq6" path="res://blisscode/interaction/actions/action_blackboard.gd" id="2_wew6h"]
+[ext_resource type="Script" uid="uid://b4row7oijb6th" path="res://blisscode/interaction/actions/action_player.gd" id="3_8yq8f"]
+[ext_resource type="Script" uid="uid://cb2xyxycxidrr" path="res://blisscode/interaction/actions/composite/action_sequence.gd" id="4_65c5v"]
+[ext_resource type="Script" uid="uid://013fjavae565" path="res://blisscode/interaction/actions/action/action_show_float_text.gd" id="5_k1v5m"]
+[ext_resource type="Script" uid="uid://y8dwkjskcxbm" path="res://blisscode/interaction/actions/action/action_body_damage.gd" id="6_vpf4l"]
+[ext_resource type="Script" uid="uid://daq81nt20xbao" path="res://blisscode/interaction/actions/action/action_knockback.gd" id="7_bd2qa"]
+[ext_resource type="Script" uid="uid://bk7y11p8vx3gb" path="res://blisscode/interaction/actions/action/action_scene_spawn.gd" id="8_dhnbj"]
+[ext_resource type="Script" uid="uid://uu88iad07gie" path="res://blisscode/interaction/actions/action/action_queue_free.gd" id="9_2t2gh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_irkl8"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnwsj"]
+
+[node name="HitboxRangeInteraction" type="Node2D" node_paths=PackedStringArray("in_range_area", "collision_area", "in_range_actions", "collision_actions")]
+script = ExtResource("1_1wwpq")
+in_range_area = NodePath("InRangeArea2D")
+collision_area = NodePath("CollisionArea2D")
+in_range_actions = NodePath("CollisionActionPlayer")
+collision_actions = NodePath("CollisionActionPlayer")
+use_collision = true
+metadata/_custom_type_script = "uid://ci1gdhk7pg65i"
+
+[node name="ActionBlackboard" type="Node" parent="."]
+script = ExtResource("2_wew6h")
+metadata/_custom_type_script = "uid://j126qsnfmyq6"
+
+[node name="CollisionActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_8yq8f")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+require_in_range = false
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="CollisionActionPlayer"]
+script = ExtResource("4_65c5v")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionShowFloatText" type="Node" parent="CollisionActionPlayer/ActionSequence"]
+script = ExtResource("5_k1v5m")
+text = "Take 1 Damage"
+offset = Vector2(-20, -15)
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://013fjavae565"
+
+[node name="ActionBodyDamage" type="Node" parent="CollisionActionPlayer/ActionSequence"]
+script = ExtResource("6_vpf4l")
+
+[node name="ActionKnockback" type="Node" parent="CollisionActionPlayer/ActionSequence"]
+script = ExtResource("7_bd2qa")
+knockback_direction = 1
+
+[node name="ActionSceneSpawn" type="Node" parent="CollisionActionPlayer/ActionSequence"]
+script = ExtResource("8_dhnbj")
+interaction_position_var = &"collision_position"
+
+[node name="ActionQueueFree" type="Node" parent="CollisionActionPlayer/ActionSequence" node_paths=PackedStringArray("node")]
+script = ExtResource("9_2t2gh")
+node = NodePath("../../..")
+
+[node name="InRangeArea2D" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InRangeArea2D"]
+shape = SubResource("CircleShape2D_irkl8")
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+shape = SubResource("RectangleShape2D_wnwsj")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://dgq6syw2qe32p"]
+[gd_scene load_steps=32 format=3 uid="uid://dgq6syw2qe32p"]
 
 [ext_resource type="Script" uid="uid://bxu41q8tb6kv5" path="res://blisscode/ui/menus/game_menus.gd" id="1_od5r7"]
 [ext_resource type="Script" uid="uid://cg8iv8veotlm8" path="res://blisscode/ui/menus/menu/menu_stack.gd" id="3_ljqv8"]
 [ext_resource type="Script" uid="uid://cfidra8l63jcf" path="res://blisscode/ui/menus/menu/menu.gd" id="4_bg78d"]
+[ext_resource type="Script" uid="uid://dupq66corv17" path="res://blisscode/ui/menus/menu/buttons/menu_game_start_button.gd" id="5_kxayy"]
 [ext_resource type="Script" uid="uid://kfj666n2xifd" path="res://blisscode/ui/menus/menu/buttons/menu_stack_button.gd" id="5_vwoi7"]
 [ext_resource type="Script" uid="uid://jnyn4yy8houc" path="res://blisscode/ui/menus/menu/buttons/menu_back_button.gd" id="6_0bqtc"]
 [ext_resource type="Texture2D" uid="uid://hbec8p1deout" path="res://assets/img/snowman/Brand.png" id="6_fn1d8"]
@@ -567,7 +568,7 @@ anchor_bottom = 0.5
 offset_left = -125.0
 offset_top = -36.0
 offset_right = 126.0
-offset_bottom = 128.5
+offset_bottom = 98.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -588,14 +589,14 @@ theme_override_constants/margin_bottom = 16
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuStack/MainMenu/Control/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="ButtonPlay" type="Button" parent="MenuStack/MainMenu/Control/Panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("menu_stack", "to_menu")]
+[node name="MenuGameStartButton" type="Button" parent="MenuStack/MainMenu/Control/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Play"
-script = ExtResource("5_vwoi7")
-menu_stack = NodePath("../../../../../..")
-to_menu = NodePath("../../../../../../PlayerProfileSelectMenu")
+script = ExtResource("5_kxayy")
+metadata/_custom_type_script = "uid://dupq66corv17"
 
 [node name="ButtonLoadGame" type="Button" parent="MenuStack/MainMenu/Control/Panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("menu_stack", "to_menu")]
+visible = false
 layout_mode = 2
 text = "Load Game"
 script = ExtResource("5_vwoi7")
@@ -783,6 +784,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SaveButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer3" node_paths=PackedStringArray("menu_stack", "to_menu")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"
@@ -792,6 +794,7 @@ to_menu = NodePath("../../../../../../../SaveGameMenu")
 metadata/_custom_type_script = "uid://kfj666n2xifd"
 
 [node name="LoadButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer3" node_paths=PackedStringArray("menu_stack", "to_menu")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Load"

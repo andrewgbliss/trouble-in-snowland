@@ -1,0 +1,215 @@
+[gd_scene load_steps=14 format=3 uid="uid://cek80acxrwkhe"]
+
+[ext_resource type="Script" uid="uid://ci1gdhk7pg65i" path="res://blisscode/interaction/interaction.gd" id="1_7fxi1"]
+[ext_resource type="Script" uid="uid://j126qsnfmyq6" path="res://blisscode/interaction/actions/action_blackboard.gd" id="2_781dc"]
+[ext_resource type="Script" uid="uid://b4row7oijb6th" path="res://blisscode/interaction/actions/action_player.gd" id="3_wppr7"]
+[ext_resource type="Script" uid="uid://cb2xyxycxidrr" path="res://blisscode/interaction/actions/composite/action_sequence.gd" id="4_4k48y"]
+[ext_resource type="Script" uid="uid://dphkqpwbvnbi1" path="res://blisscode/interaction/actions/action/action_print.gd" id="5_7j64d"]
+[ext_resource type="Script" uid="uid://013fjavae565" path="res://blisscode/interaction/actions/action/action_show_float_text.gd" id="6_pscrb"]
+[ext_resource type="Script" uid="uid://dg5lf7m8rpd70" path="res://blisscode/interaction/actions/action/action_hide_float_text.gd" id="7_fy0ff"]
+[ext_resource type="Script" uid="uid://bfkovtfgj1dkj" path="res://blisscode/interaction/actions/action/action_pickup.gd" id="8_80q8a"]
+[ext_resource type="Script" uid="uid://b0ty10umsx8la" path="res://blisscode/interaction/interaction_item.gd" id="10_eecod"]
+[ext_resource type="Script" uid="uid://uu88iad07gie" path="res://blisscode/interaction/actions/action/action_queue_free.gd" id="10_wppr7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1dc4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogkul"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aiuo7"]
+
+[node name="RandomItemInteraction" type="Node2D" node_paths=PackedStringArray("interact_area", "in_range_area", "collision_area", "on_ready_actions", "in_range_actions", "out_of_range_actions", "mouse_over_actions", "mouse_out_actions", "mouse_click_actions", "keyboard_take_actions", "collision_actions")]
+script = ExtResource("1_7fxi1")
+interact_area = NodePath("InteractArea2D")
+in_range_area = NodePath("InRangeArea2D")
+collision_area = NodePath("CollisionArea2D")
+on_ready_actions = NodePath("OnReadyActionPlayer")
+in_range_actions = NodePath("InRangeActionPlayer")
+out_of_range_actions = NodePath("OutRangeActionPlayer")
+mouse_over_actions = NodePath("MouseOverActionPlayer")
+mouse_out_actions = NodePath("MouseOutActionPlayer")
+mouse_click_actions = NodePath("MouseClickActionPlayer")
+keyboard_take_actions = NodePath("KeyboardTakeActionPlayer")
+collision_actions = NodePath("CollisionActionPlayer")
+use_keyboard_take = true
+use_mouse = true
+use_collision = true
+metadata/_custom_type_script = "uid://ci1gdhk7pg65i"
+
+[node name="ActionBlackboard" type="Node" parent="."]
+script = ExtResource("2_781dc")
+metadata/_custom_type_script = "uid://j126qsnfmyq6"
+
+[node name="OnReadyActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_wppr7")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="OnReadyActionPlayer"]
+script = ExtResource("4_4k48y")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionPrint" type="Node" parent="OnReadyActionPlayer/ActionSequence"]
+script = ExtResource("5_7j64d")
+text = "Ready for interaction"
+metadata/_custom_type_script = "uid://dphkqpwbvnbi1"
+
+[node name="InRangeActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_wppr7")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="InRangeActionPlayer"]
+script = ExtResource("4_4k48y")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionShowFloatText" type="Node" parent="InRangeActionPlayer/ActionSequence"]
+script = ExtResource("6_pscrb")
+text = "Press F to Interact"
+offset = Vector2(-20, -15)
+stay = true
+metadata/_custom_type_script = "uid://013fjavae565"
+
+[node name="OutRangeActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_wppr7")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="OutRangeActionPlayer"]
+script = ExtResource("4_4k48y")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionHideFloatText" type="Node" parent="OutRangeActionPlayer/ActionSequence"]
+script = ExtResource("7_fy0ff")
+metadata/_custom_type_script = "uid://dg5lf7m8rpd70"
+
+[node name="MouseOverActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_wppr7")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="MouseOverActionPlayer"]
+script = ExtResource("4_4k48y")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionShowFloatText" type="Node" parent="MouseOverActionPlayer/ActionSequence"]
+script = ExtResource("6_pscrb")
+text = "Press F to Interact"
+offset = Vector2(-20, -15)
+stay = true
+metadata/_custom_type_script = "uid://013fjavae565"
+
+[node name="MouseOutActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_wppr7")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="MouseOutActionPlayer"]
+script = ExtResource("4_4k48y")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionHideFloatText" type="Node" parent="MouseOutActionPlayer/ActionSequence"]
+script = ExtResource("7_fy0ff")
+metadata/_custom_type_script = "uid://dg5lf7m8rpd70"
+
+[node name="MouseClickActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_wppr7")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="MouseClickActionPlayer"]
+script = ExtResource("4_4k48y")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionShowFloatText" type="Node" parent="MouseClickActionPlayer/ActionSequence"]
+script = ExtResource("6_pscrb")
+text = "You clicked me!"
+offset = Vector2(-15, 0)
+metadata/_custom_type_script = "uid://013fjavae565"
+
+[node name="KeyboardTakeActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_wppr7")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="KeyboardTakeActionPlayer"]
+script = ExtResource("4_4k48y")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionPickup" type="Node" parent="KeyboardTakeActionPlayer/ActionSequence" node_paths=PackedStringArray("interaction_item")]
+script = ExtResource("8_80q8a")
+interaction_item = NodePath("../../../InteractionItem")
+metadata/_custom_type_script = "uid://bfkovtfgj1dkj"
+
+[node name="ActionShowFloatText" type="Node" parent="KeyboardTakeActionPlayer/ActionSequence"]
+script = ExtResource("6_pscrb")
+text = "You got the item!"
+offset = Vector2(-15, 0)
+metadata/_custom_type_script = "uid://013fjavae565"
+
+[node name="ActionQueueFree" type="Node" parent="KeyboardTakeActionPlayer/ActionSequence" node_paths=PackedStringArray("node")]
+script = ExtResource("10_wppr7")
+node = NodePath("../../..")
+
+[node name="CollisionActionPlayer" type="Node" parent="." node_paths=PackedStringArray("blackboard", "root_node")]
+script = ExtResource("3_wppr7")
+blackboard = NodePath("../ActionBlackboard")
+root_node = NodePath("ActionSequence")
+one_shot = true
+metadata/_custom_type_script = "uid://b4row7oijb6th"
+
+[node name="ActionSequence" type="Node" parent="CollisionActionPlayer"]
+script = ExtResource("4_4k48y")
+metadata/_custom_type_script = "uid://cb2xyxycxidrr"
+
+[node name="ActionPickup" type="Node" parent="CollisionActionPlayer/ActionSequence" node_paths=PackedStringArray("interaction_item")]
+script = ExtResource("8_80q8a")
+interaction_item = NodePath("../../../InteractionItem")
+metadata/_custom_type_script = "uid://bfkovtfgj1dkj"
+
+[node name="ActionShowFloatText" type="Node" parent="CollisionActionPlayer/ActionSequence"]
+script = ExtResource("6_pscrb")
+text = "You got the item!"
+offset = Vector2(-15, 0)
+metadata/_custom_type_script = "uid://013fjavae565"
+
+[node name="ActionQueueFree" type="Node" parent="CollisionActionPlayer/ActionSequence" node_paths=PackedStringArray("node")]
+script = ExtResource("10_wppr7")
+node = NodePath("../../..")
+
+[node name="InteractionItem" type="Node2D" parent="."]
+script = ExtResource("10_eecod")
+create_random_item = true
+metadata/_custom_type_script = "uid://b0ty10umsx8la"
+
+[node name="InteractArea2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea2D"]
+shape = SubResource("RectangleShape2D_f1dc4")
+
+[node name="InRangeArea2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InRangeArea2D"]
+shape = SubResource("CircleShape2D_ogkul")
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+collision_layer = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+shape = SubResource("RectangleShape2D_aiuo7")

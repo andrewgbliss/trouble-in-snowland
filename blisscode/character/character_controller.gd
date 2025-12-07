@@ -42,10 +42,12 @@ var flip_h_lock: bool = false
 var jump_count: int = 0
 var wall_cling_point: Vector2 = Vector2.ZERO
 var current_tilemap_collider: TileMapLayerAdvanced
+var skin: SpriteFrames = null
 
 signal spawned(pos: Vector2)
 signal died(character: CharacterController)
 signal facing_direction_changed
+signal skin_changed(skin: SpriteFrames)
 
 func _ready() -> void:
 	if hide_on_ready:
@@ -57,16 +59,17 @@ func _ready() -> void:
 	if not is_facing_right:
 		flip_h()
 
-func set_skin(skin: SpriteFrames):
+func set_skin(s: SpriteFrames):
+	skin = s
 	if animated_sprite:
 		animated_sprite.sprite_frames = skin
+		skin_changed.emit(skin)
 
 func _on_gravity_dir_changed(dir: Vector2):
 	gravity_dir = dir
 
 func move(direction: Vector2, delta: float, resolve: bool = false) -> bool:
-	velocity += apply_gravity(delta)
-
+	apply_gravity(delta)
 	var physics = character.get_physics_group()
 	
 	if not paralyzed:
@@ -105,7 +108,7 @@ func change_to_position(new_position: Vector2 = Vector2.ZERO):
 	
 func apply_gravity(delta: float):
 	var physics = character.get_physics_group()
-	return get_gravity() * gravity_dir.normalized() * physics.gravity_percent * delta
+	velocity += get_gravity() * gravity_dir.normalized() * physics.gravity_percent * delta
 
 func move_toward(direction: Vector2, s: float):
 	if paralyzed:
@@ -203,7 +206,7 @@ func wall_jump():
 	wall_cling_point = Vector2.ZERO
 
 func is_falling():
-	return velocity.y > 0 and not is_on_floor()
+	return velocity.y >= 0.0 and not is_on_floor()
 
 func is_dangling():
 	if dangling_raycast:
